@@ -5,7 +5,6 @@ export const fetchQuestions = async (amount, difficulty) => {
     const endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple`;
     const data = await fetch(endpoint);
     const jsonData = await data.json();
-    // console.log(jsonData.results);
     return jsonData.results.map((question) => (
         {
             ...question,
@@ -30,4 +29,4 @@ const questions = {
     type: ""
 }
 
-export const questionState = questions & {answers: ['']};
+export const questionState = questions & {answers: []};

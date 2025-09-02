@@ -5,6 +5,7 @@ import { fetchQuestions, difficulty, questionState } from './Api'
 
 const totalQuestions = 10
 
+
 const answerObject = {
   question: "",
   answer: "",
@@ -48,12 +49,12 @@ function App() {
       {
         loading ? <p className="loading-questions">Loading Questions...</p> : null
       }
-      {!loading && !gameProgress ? 
+      {!loading && !gameProgress && questions.length > 0 ? 
         <QuestionCard 
           questionNum={number + 1}
           totalQuestions={totalQuestions}
           question={questions[number].question}
-          answers={questions[number].answer}
+          answers={questions[number].answers}
           userAnswer={userAnswers ? userAnswers[number] : undefined}
           callback={checkAnswers}
         /> : null}

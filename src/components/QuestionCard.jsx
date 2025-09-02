@@ -2,7 +2,7 @@ import React from 'react'
 
 const props = {
     question: "",
-    answers: [''],
+    answers: [],
     callback: null,
     userAnswer: "",
     questionNum: 0,
@@ -27,7 +27,7 @@ export const QuestionCard = (
         <h2>{question}</h2>
         <div>
             {answers.map((ans) => (
-                <button className="ans" onClick={callback(ans)} disabled={!!userAnswer}>{ans}</button>
+                <button className="ans" onClick={() => callback(ans)} disabled={!!userAnswer}>{ans}</button>
             ))}
         </div>
     </div>
