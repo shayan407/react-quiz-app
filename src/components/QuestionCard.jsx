@@ -24,10 +24,10 @@ export const QuestionCard = (
         <p>
             {questionNum} / {totalQuestions}
         </p>
-        <h2>{question}</h2>
+        <h2 dangerouslySetInnerHTML={{ __html: question }} />
         <div>
             {answers.map((ans) => (
-                <button className="ans" onClick={() => callback(ans)} disabled={!!userAnswer}>{ans}</button>
+                <button className="ans" onClick={callback} value={ans} disabled={!!userAnswer} dangerouslySetInnerHTML={{__html: ans}} />
             ))}
         </div>
     </div>

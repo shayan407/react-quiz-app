@@ -20,8 +20,9 @@ function App() {
   const [userAnswers, setUserAnswers] = useState([]);
   const [score, setScore] = useState(0);
   const [gameProgress, setGameProgress] = useState(true);
+  const [timer, setTimer] = useState(30);
 
-  console.log(questions)
+  console.log(questions[number])
 
   const startQuiz = async () => {
     setLoading(true);
@@ -33,8 +34,37 @@ function App() {
     setNumber(0);
     setLoading(false);
   };
-  const nextQuestion = () => {};
-  const checkAnswers = (e) => {};
+  const nextQuestion = () => {
+    const nextQuestion = number + 1;
+    
+    if(nextQuestion === totalQuestions){
+      setGameProgress(true);
+    }else{
+      setNumber(nextQuestion);
+    }
+  };
+  const checkAnswers = (e) => {
+    if (!gameProgress) {
+      const answer = e.currentTarget.value;
+      const correct = questions[number].correct_answer === answer;
+      console.log(answer);
+      
+
+      if (correct) setScore((prev) => prev + 1);
+
+      const answerObject = {
+        question: questions[number].question,
+        answer,
+        correct,
+        correctAnswer: questions[number].correct_answer
+      };
+
+      setUserAnswers((prev) => [...prev, answerObject]);
+
+      console.log(userAnswers);
+      
+    }
+  };
 
 
   return (
@@ -59,7 +89,7 @@ function App() {
           callback={checkAnswers}
         /> : null}
       {
-        !gameProgress && !loading && userAnswers.length === number + 1 && number !== totalQuestions ? <button className="next-question" onClick={nextQuestion}>Next Question</button> : null
+        !gameProgress && !loading && userAnswers.length === number + 1 && number !== totalQuestions - 1 ? <button className="next-question" onClick={nextQuestion}>Next Question</button> : null
       }
     </>
   )
